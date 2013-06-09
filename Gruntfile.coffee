@@ -1,6 +1,20 @@
 module.exports = (grunt) ->
   grunt.initConfig
+
+    connect:
+      server:
+        options:
+          port: 9001
+          base: 'build'
+
+    open:
+      dev:
+        path: 'http://localhost:9001/'
+
     watch:
+      options:
+        nospawn: true
+        livereload: true
 
       css:
         files: ["app/styles/*.scss"]
@@ -13,7 +27,6 @@ module.exports = (grunt) ->
       js:
         files: ["app/scripts/*.coffee"]
         tasks: ["coffee"]
-
 
     haml:
       dist:
@@ -39,4 +52,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-haml"
   grunt.loadNpmTasks "grunt-contrib-sass"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["watch", "haml"]
+  grunt.loadNpmTasks "grunt-contrib-connect"
+  grunt.loadNpmTasks "grunt-open"
+
+  grunt.registerTask "default", ["connect", "open", "watch"]
