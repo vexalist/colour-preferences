@@ -18,10 +18,10 @@ module.exports = (grunt) ->
     haml:
       dist:
         files: [{
-          expand: true,
-          cwd: 'app/',
-          src:  "**/*.haml",
-          dest: "build/",
+          expand: true
+          cwd: 'app/'
+          src:  "**/*.haml"
+          dest: "build/"
           ext: '.html'
         }]
 
