@@ -18,7 +18,7 @@ module.exports = (grunt) ->
 
       css:
         files: ["app/styles/*.scss"]
-        tasks: ["sass"]
+        tasks: ["compass"]
 
       html:
         files: ["app/*.haml"]
@@ -38,10 +38,12 @@ module.exports = (grunt) ->
           ext: '.html'
         }]
 
-    sass:
+    compass:
       dist:
-        files:
-          "build/styles.css": "app/styles/main.scss"
+        options:
+          sassDir: "app/styles/",
+          cssDir: "build/"
+          config: '.compass_config.rb'
 
     coffee:
       dist:
@@ -50,7 +52,7 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-haml"
-  grunt.loadNpmTasks "grunt-contrib-sass"
+  grunt.loadNpmTasks "grunt-contrib-compass"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-open"
