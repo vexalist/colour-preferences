@@ -25,8 +25,8 @@ module.exports = (grunt) ->
         tasks: ["haml"]
 
       js:
-        files: ["app/scripts/*.coffee"]
-        tasks: ["coffee"]
+        files: ["app/scripts/*.coffee", "specs/coffee/*.coffee"]
+        tasks: ["coffee", "test"]
 
     haml:
       dist:
@@ -48,7 +48,13 @@ module.exports = (grunt) ->
     coffee:
       dist:
         files:
-          "build/application.js": "app/scripts/application.coffee"
+          "build/application.js": "app/scripts/application.coffee",
+          "specs/js/application-spec.js": "specs/coffee/*.coffee"
+
+    jasmine:
+      src:     'build/application.js',
+      options:
+        specs: 'specs/js/application-spec.js'
 
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-haml"
@@ -56,5 +62,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-open"
+  grunt.loadNpmTasks 'grunt-contrib-jasmine'
 
   grunt.registerTask "default", ["connect", "open", "watch"]
+  grunt.registerTask 'test', ['coffee', 'jasmine']
+  grunt.registerTask 'watch_test', ['watch:js', 'jasmine']
