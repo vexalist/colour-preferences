@@ -26,7 +26,7 @@ module.exports = (grunt) ->
 
       js:
         files: ['app/scripts/*.coffee', 'specs/coffee/*.coffee']
-        tasks: ['coffee', 'test']
+        tasks: ['coffee', 'jasmine']
 
     haml:
       dist:
